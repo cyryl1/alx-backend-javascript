@@ -1,5 +1,4 @@
-export default function getResponseFromAPI()
-{
+export default function getResponseFromAPI() {
     return new Promise((resolve, reject) => {
         let success = true;
         if (success) { // Simulate API success
