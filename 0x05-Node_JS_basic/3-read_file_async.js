@@ -1,47 +1,45 @@
-const fs = require('fs');
-const { parse } = require('csv-parse');
+const fs = require('fs').promises;
 
 function countStudents(path) {
-        return new Promise((resolve, reject) => {
-		let retString = '';
-                fs.readFile(path, 'utf8', (err, data) => {
-			if (err) {
-				throw new Error('Cannot load the database');
-				return;
-			}
+  return fs.readFile(path, 'utf8')
+    .then((fileContent) => {
+      // Split lines and remove header and empty lines
+      const lines = fileContent.trim().split('\n')
+        .slice(1) // Remove header
+        .filter(line => line.trim() !== ''); // Remove empty lines
 
-			parse(data, { delimiter: ',', from_line: 2 }, (err, records) => {
-				if (err) {
-					reject(new Error('Cannot parse the CSV data'));
-					return;
-				}
-				const fields = {};
+      // Log total number of students
+      console.log(`Number of students: ${lines.length}`);
 
-				const validRows = records.filter(row => row.length > 0 && row[0] !== '');
-				validRows.forEach(row => {
-					const firstName = row[0];
-					const field = row[3];
+      // Object to store students by field
+      const studentsByField = {};
 
-					if (!fields[field]) {
-						fields[field] = [];
-					}
-					fields[field].push(firstName);
-				});
+      // Process each line
+      lines.forEach(line => {
+        const [firstname, , , field] = line.split(',');
+        
+        // Initialize field array if not exists
+        if (!studentsByField[field]) {
+          studentsByField[field] = [];
+        }
+        
+        // Add firstname to the corresponding field
+        studentsByField[field].push(firstname);
+      });
 
-				const totalStudents = validRows.length;
-				retString += (`Number of students: ${totalStudents}\n`);
-				//let result = `Number of students: ${totalStudents}\n`;
+      // Sort and log students in each field
+      const sortedFields = Object.keys(studentsByField)
+        .sort((a, b) => a.localeCompare(b));
 
-				Object.entries(fields).forEach(([field, students]) => {
-
-					retString += (`Number of students in ${field}: ${students.length}. List: ${students.join(', ')}\n`);
-					//result += `Number of students in ${field}: ${students.length}. List: ${students.join(', ')}\n`;
-				});
-
-				resolve(retString);
-			});
-		});
-	});
+      sortedFields.forEach(field => {
+        const students = studentsByField[field];
+        console.log(`Number of students in ${field}: ${students.length}. List: ${students.join(', ')}`);
+      });
+    })
+    .catch(() => {
+      // If file reading fails, throw an error
+      throw new Error('Cannot load the database');
+    });
 }
 
 module.exports = countStudents;
