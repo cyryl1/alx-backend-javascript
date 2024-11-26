@@ -34,7 +34,7 @@ function countStudents(path) {
 
 				Object.entries(fields).forEach(([field, students]) => {
 
-					retString += (`\nNumber of students in ${field}: ${students.length}. List: ${students.join(', ')}`);
+					retString += (`Number of students in ${field}: ${students.length}. List: ${students.join(', ')}\n`);
 					//result += `Number of students in ${field}: ${students.length}. List: ${students.join(', ')}\n`;
 				});
 

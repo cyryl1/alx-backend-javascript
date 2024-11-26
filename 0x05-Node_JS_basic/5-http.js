@@ -13,7 +13,7 @@ const app =  http.createServer(async (req, res) => {
 		res.write('This is the list of out students\n');
 		try {
 			const response = await countStudents(databasePath);
-			res.write(response)
+			res.write(responsei)
 		} catch (err) {
 			res.write(err.message);
 		}
@@ -27,3 +27,4 @@ const app =  http.createServer(async (req, res) => {
 app.listen(1245);
 
 module.exports = app;
+
