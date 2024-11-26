@@ -10,7 +10,7 @@ class StudentsController {
 	static async getAllStudents(req, res) {
 		//const path = process.argv[2];
 		try {
-			const data = await readDatatbase('database.csv');
+			const data = await readDatatbase('./database.csv');
 			 res.status(200).send(`This is the list of our students
 				 ${Object.keys(fields).sort().map((field) => {
 					 const students = fields[field];
@@ -39,7 +39,7 @@ class StudentsController {
 		}
 
 		try {
-			const data = await readDatabase('database.csv');
+			const data = await readDatabase('./database.csv');
 			const students = data[major]
 
 			if (!students) {
