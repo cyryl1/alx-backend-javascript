@@ -1,22 +1,26 @@
 const express = require('express');
+const countStudents = require('./3-read_file_async');
+
 const app = express();
-const countStudents = require('./3-read_file_async.js');
-const database = process.argv[2] || '';
 
 app.get('/', (req, res) => {
-	res.send('Hello Holberton School!');
+  res.send('Hello Holberton School!');
 });
 
 app.get('/students', async (req, res) => {
-	//res.send('This is the list of our students\n');
-	try {
-		const student = await countStudents(database);
-		res.send(`This is the list of our students\n${student}`);
-	} catch (err) {
-		res.send(err.message);
-	}
+  const databasePath = process.argv[2] || './database.csv';
+  
+  try {
+    const studentList = await countStudents(databasePath);
+    res.send(`This is the list of our students\n${studentList}`);
+  } catch (error) {
+    res.status(500).send(`This is the list of our students\n${error.message}`);
+  }
 });
 
-app.listen(1245)
+const PORT = 1245;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
-module.exports = app;
+module.exports = app;;
