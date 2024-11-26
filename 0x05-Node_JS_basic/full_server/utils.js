@@ -10,7 +10,6 @@ import path from 'path';
 
 export const readDatabase = (filePath) => {
 	return new Promise((resolve, reject) => {
-		const filePath = path.resolve(__dirname, '..', filePath);
 		fs.readFile(path.resolve(filePath), 'utf-8', (err, data) => {
 			if (err) reject(err);
 			const students = JSON.parse(data);
