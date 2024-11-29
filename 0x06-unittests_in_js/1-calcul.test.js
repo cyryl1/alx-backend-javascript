@@ -3,15 +3,15 @@ const assert = require('assert');
 
 describe('calculateNumber', () => {
     it('should add two whole numbers correctly', () => {
-        assert.strictEqual(calculateNumber('SUM', 1, 3), 4)
+        assert.strictEqual(calculateNumber('SUM', 1, 3), 4);
     });
 
     it('should subtract two whole numbers correctly', () => {
-        assert.strictEqual(calculateNumber('SUBTRACT', 1, 3), 2)
+        assert.strictEqual(calculateNumber('SUBTRACT', 1, 3), 2);
     });
 
     it('should divide two whole numbers correctly', () => {
-        assert.strictEqual(calculateNumber('DIVIDE', 4, 2), 2)
+        assert.strictEqual(calculateNumber('DIVIDE', 4, 2), 2);
     });
 
     it('should round down decimal numbers less than .5', () => {
