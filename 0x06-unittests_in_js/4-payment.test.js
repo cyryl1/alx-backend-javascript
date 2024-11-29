@@ -5,15 +5,6 @@ const { expect } = require('chai');
 
 describe('sendPaymentRequestToApi', function () {
     let consoleSpy;
-
-    beforeEach(function () {
-        consoleSpy = sinon.spy(console, 'log');
-    });
-
-    afterEach(function () {
-        consoleSpy.restore();
-    });
-
     it('should call Utils.calculateNumber with correct arguments', function () {
         const spy = sinon.spy(Utils, 'calculateNumber');
 
@@ -26,6 +17,8 @@ describe('sendPaymentRequestToApi', function () {
     });
 
     it('should stub Utils.calculateNumber to always return 10', () => {
+        consoleSpy = sinon.spy(console, 'log');
+
         const stub = sinon.stub(Utils, 'calculateNumber').returns(10);
 
         sendPaymentRequestToApi(100, 20);
@@ -35,6 +28,7 @@ describe('sendPaymentRequestToApi', function () {
 
         expect(consoleSpy.calledOnceWithExactly('The total is: 10')).to.be.true;
 
+        consoleSpy.restore();
         stub.restore();
     });
 });
