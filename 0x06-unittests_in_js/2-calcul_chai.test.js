@@ -7,7 +7,7 @@ describe('calculateNumber', () => {
     });
 
     it('should subtract two whole numbers correctly', () => {
-        expect(calculateNumber('SUBTRACT', 1, 3)).to.equal(2);
+        expect(calculateNumber('SUBTRACT', 1, 3)).to.equal(-2);
     });
 
     it('should divide two whole numbers correctly', () => {
@@ -19,7 +19,7 @@ describe('calculateNumber', () => {
     });
 
     it('should round up decimal numbers .5 and above', () => {
-        expect(calculateNumber('SUBTRACT', 1.7, 3.7)).to.equal(2);
+        expect(calculateNumber('SUBTRACT', 1.7, 3.7)).to.equal(-2);
     });
 
     it('should handle zero correctly', () => {
@@ -39,7 +39,7 @@ describe('calculateNumber', () => {
     });
 
     it('should round the first number down and second number up', () => {
-        expect(calculateNumber('SUBTRACT', 1.3, 3.7)).to.equal(3);
+        expect(calculateNumber('SUBTRACT', 1.3, 3.7)).to.equal(-3);
     });
 
 })

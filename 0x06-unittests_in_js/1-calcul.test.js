@@ -7,7 +7,7 @@ describe('calculateNumber', () => {
     });
 
     it('should subtract two whole numbers correctly', () => {
-        assert.strictEqual(calculateNumber('SUBTRACT', 1, 3), 2);
+        assert.strictEqual(calculateNumber('SUBTRACT', 1, 3), -2);
     });
 
     it('should divide two whole numbers correctly', () => {
@@ -19,7 +19,7 @@ describe('calculateNumber', () => {
     });
 
     it('should round up decimal numbers .5 and above', () => {
-        assert.strictEqual(calculateNumber('SUBTRACT', 1.7, 3.7), 2);
+        assert.strictEqual(calculateNumber('SUBTRACT', 1.7, 3.7), -2);
     });
 
     it('should handle zero correctly', () => {
@@ -39,7 +39,7 @@ describe('calculateNumber', () => {
     });
 
     it('should round the first number down and second number up', () => {
-        assert.strictEqual(calculateNumber('SUBTRACT', 1.3, 3.7), 3);
+        assert.strictEqual(calculateNumber('SUBTRACT', 1.3, 3.7), -3);
     });
 
 })
